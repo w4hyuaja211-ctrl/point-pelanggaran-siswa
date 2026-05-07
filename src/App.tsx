@@ -20,6 +20,7 @@ import KelasAdmin from "./pages/admin/Kelas";
 import SiswaAdmin from "./pages/admin/SiswaAdmin";
 import KatalogPelanggaran from "./pages/admin/KatalogPelanggaran";
 import UsersAdmin from "./pages/admin/UsersAdmin";
+import ImportData from "./pages/admin/ImportData";
 
 const queryClient = new QueryClient();
 
@@ -45,6 +46,7 @@ const App = () => (
               <Route path="/admin/siswa" element={<RequireRole roles={["admin"]}><SiswaAdmin /></RequireRole>} />
               <Route path="/admin/katalog" element={<RequireRole roles={["admin"]}><KatalogPelanggaran /></RequireRole>} />
               <Route path="/admin/users" element={<RequireRole roles={["admin"]}><UsersAdmin /></RequireRole>} />
+              <Route path="/admin/import" element={<RequireRole roles={["admin"]}><ImportData /></RequireRole>} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>
