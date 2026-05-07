@@ -15,6 +15,7 @@ import {
   ListChecks,
   CalendarRange,
   UserCog,
+  FileSpreadsheet,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -33,6 +34,7 @@ const NAV: NavItem[] = [
   { to: "/admin/siswa", label: "Kelola Siswa", icon: Users, roles: ["admin"] },
   { to: "/admin/katalog", label: "Katalog Pelanggaran", icon: ListChecks, roles: ["admin"] },
   { to: "/admin/users", label: "Pengguna & Peran", icon: UserCog, roles: ["admin"] },
+  { to: "/admin/import", label: "Import Excel", icon: FileSpreadsheet, roles: ["admin"] },
 ];
 
 export default function AppLayout() {

@@ -1,1 +1,4 @@
 project_id = "ymswnchmyafvukgrtzla"
+
+[functions.lookup-login-code]
+verify_jwt = false

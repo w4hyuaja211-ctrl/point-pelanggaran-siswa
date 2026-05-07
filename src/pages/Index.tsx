@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useAuth } from "@/hooks/useAuth";
-import { Users, AlertTriangle, CalendarCheck, TrendingUp } from "lucide-react";
+import { Users, AlertTriangle, CalendarCheck, TrendingUp, Clock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 interface Stats {
@@ -26,6 +26,18 @@ const Index = () => {
   const [stats, setStats] = useState<Stats>({ totalSiswa: 0, totalPelanggaran: 0, hadirHariIni: 0, totalKelas: 0 });
   const [sekolah, setSekolah] = useState<Sekolah | null>(null);
   const [ta, setTa] = useState<TahunAjaran | null>(null);
+  const [now, setNow] = useState(() => new Date());
+
+  useEffect(() => {
+    const t = setInterval(() => setNow(new Date()), 1000);
+    return () => clearInterval(t);
+  }, []);
+
+  const wib = new Intl.DateTimeFormat("id-ID", {
+    timeZone: "Asia/Jakarta", hour12: false,
+    weekday: "long", day: "2-digit", month: "long", year: "numeric",
+    hour: "2-digit", minute: "2-digit", second: "2-digit",
+  }).format(now);
 
   useEffect(() => {
     const load = async () => {
@@ -59,12 +71,16 @@ const Index = () => {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 animate-fade-in">
       <div className="rounded-2xl bg-[var(--gradient-primary)] text-primary-foreground p-6 md:p-8 shadow-[var(--shadow-elegant)]">
         <div className="flex items-start justify-between flex-wrap gap-4">
           <div>
             <h1 className="text-2xl md:text-3xl font-bold">{sekolah?.nama_sekolah ?? "Selamat Datang"}</h1>
             <p className="text-primary-foreground/80 mt-1">Kepala Sekolah: {sekolah?.kepala_sekolah || "-"}</p>
+            <div className="flex items-center gap-2 mt-3 text-sm text-primary-foreground/90">
+              <Clock size={14} />
+              <span className="font-mono">{wib} WIB</span>
+            </div>
           </div>
           <div className="flex flex-col items-end gap-2">
             {ta ? (
